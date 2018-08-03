@@ -1,6 +1,9 @@
 const alibay = require('./alibay')
 const express = require('express')
 const app = express()
+const bodyParser = require('body-parser')
+
+app.use(bodyParser.raw({type: "*/*"}))
 
 let serverState ={
     user: {},
@@ -37,7 +40,7 @@ app.post('/createAccount', (req,res) => {
     let confirmedPassword = "pwd123"
    
     if(password === confirmedPassword) {
-    serverState.user[username] = password
+    //serverState.user[username] = password
     res.send(JSON.stringify({success: true, response: "account created"}))
     } else {
         res.send(JSON.stringify({success: false, response: "password didn't match"}))
@@ -99,7 +102,8 @@ app.post('/itemsSold', (req, res) => {
             itemDescription: "Delightful", 
             itemPrice: 34.99,
             numberRemaining: 4,
-            itemImage: "./harryblack.png"
+            itemImage: "./harryblack.png",
+            keyword: "round"
             }}))
     } else {
         res.send(JSON.stringify({sucess: false, reason: "no items sold"}))
@@ -116,8 +120,11 @@ app.post('/itemsBought', (req, res) => {
             itemDescription: "Delightful", 
             itemPrice: 34.99,
             numberRemaining: 4,
-            itemImage: "./harryblack.png"
+            itemImage: "./harryblack.png",
+            keyword: "round"
         }}))
+    } else {
+        res.send(JSON.stringify({sucess: false, reason: "no items bought"}))
     }
 })
 
@@ -133,14 +140,15 @@ app.post('/putItemForSale', (req, res) => {
 app.post('/findItem', (req,res) => {
     let parsed = JSON.parse(req.body.toString())
     if(parsed.keyword) {
-        res.send(JSON.parse({sucess: true, item: {
+        res.send(JSON.stringify({sucess: true, item: {
             itemId: "g1234",
             buyerId: "r234",
             itemName: "Harry Black",
             itemDescription: "Delightful", 
             itemPrice: 34.99,
             numberRemaining: 4,
-            itemImage: "./harryblack.png"
+            itemImage: "./harryblack.png",
+            keyword: "round"
         }}))
     } else {
         res.send(JSON.stringify({success: false, reason: "could not load results" }))
