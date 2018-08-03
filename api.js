@@ -84,7 +84,8 @@ app.post('/itemDetails', (req, res) => {
             itemDescription: "Delightful", 
             itemPrice: 34.99,
             numberRemaining: 4,
-            itemImage: "./harryblack.png"
+            itemImage: "./harryblack.png",
+            keyword: "round"
         }}))
     } else {
         res.send(JSON.stringify({succes: false, reason: "item not available"}))
