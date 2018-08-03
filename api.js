@@ -96,7 +96,7 @@ app.post('/itemDetails', (req, res) => {
 app.post('/itemsSold', (req, res) => {
     let parsed = JSON.parse(req.body.toString())
     if( parsed.userId) {
-        res.send(JSON.stringify({success: true, itemsSold:{
+        res.send(JSON.stringify({success: true, itemsSold:[{
             itemId: "g1234",
             sellerId: "m123",
             itemName: "Harry Black",
@@ -105,7 +105,7 @@ app.post('/itemsSold', (req, res) => {
             numberRemaining: 4,
             itemImage: "./harryblack.png",
             keyword: "round"
-            }}))
+            }]}))
     } else {
         res.send(JSON.stringify({sucess: false, reason: "no items sold"}))
     }
@@ -114,7 +114,7 @@ app.post('/itemsSold', (req, res) => {
 app.post('/itemsBought', (req, res) => {
     let parsed = JSON.parse(req.body.toString())
     if(parsed.userId) {
-        res.send(JSON.stringify({sucess: true, itemsBought: {
+        res.send(JSON.stringify({sucess: true, itemsBought: [{
             itemId: "g1234",
             buyerId: "r234",
             itemName: "Harry Black",
@@ -123,7 +123,7 @@ app.post('/itemsBought', (req, res) => {
             numberRemaining: 4,
             itemImage: "./harryblack.png",
             keyword: "round"
-        }}))
+        }]}))
     } else {
         res.send(JSON.stringify({sucess: false, reason: "no items bought"}))
     }
